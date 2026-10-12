@@ -1,4 +1,4 @@
--- Draft MySQL schema for the next development milestone.
+-- Import in MySQL using ISPmanager/phpMyAdmin. Do not expose this file publicly.
 CREATE TABLE IF NOT EXISTS registrations (
  id BIGINT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
  public_token CHAR(64) NOT NULL UNIQUE,
