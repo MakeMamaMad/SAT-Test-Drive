@@ -6,4 +6,6 @@ return [
  'db_name' => 'replace_database_name',
  'db_user' => 'replace_database_user',
  'db_password' => 'replace_database_password',
+ // Generate locally with: php -r "echo password_hash('YOUR_STRONG_PASSWORD', PASSWORD_DEFAULT), PHP_EOL;"
+ 'admin_password_hash' => 'paste_generated_hash_here',
 ];
