@@ -47,13 +47,13 @@ body{margin:0;font:15px Arial,sans-serif;background:#eff0e7;color:#151715}.wrap{
 <?php if (empty($_SESSION['admin'])): ?>
 <p>Введите пароль администратора.</p><form method="post"><input type="hidden" name="csrf" value="<?=esc($_SESSION['csrf'])?>"><input type="password" name="password" required autocomplete="current-password"><button>Войти</button></form>
 <?php else:
-$rows=db()->query('SELECT id, model, full_name, phone, email, status, created_at FROM registrations ORDER BY id DESC LIMIT 200')->fetchAll(PDO::FETCH_ASSOC);
+$rows=db()->query('SELECT id, model, axles, full_name, phone, email, status, created_at FROM registrations ORDER BY id DESC LIMIT 200')->fetchAll(PDO::FETCH_ASSOC);
 ?>
 <form method="post"><input type="hidden" name="csrf" value="<?=esc($_SESSION['csrf'])?>"><button name="logout" value="1">Выйти</button></form>
 <p>Последние 200 заявок. Изменение статуса пересчитывает позицию ожидающих в соответствующей очереди.</p>
-<table><thead><tr><th>№</th><th>Модель</th><th>ФИО</th><th>Телефон</th><th>Почта</th><th>Создана (UTC)</th><th>Статус</th></tr></thead><tbody>
+<table><thead><tr><th>№</th><th>Модель</th><th>Оси</th><th>ФИО</th><th>Телефон</th><th>Почта</th><th>Создана (UTC)</th><th>Статус</th></tr></thead><tbody>
 <?php foreach($rows as $row): ?><tr>
-<td><?=esc($row['id'])?></td><td><?=esc($row['model'])?></td><td><?=esc($row['full_name'])?></td><td><?=esc($row['phone'])?></td><td><?=esc($row['email'])?></td><td><?=esc($row['created_at'])?></td>
+<td><?=esc($row['id'])?></td><td><?=esc($row['model'])?></td><td><?=esc($row['axles'])?></td><td><?=esc($row['full_name'])?></td><td><?=esc($row['phone'])?></td><td><?=esc($row['email'])?></td><td><?=esc($row['created_at'])?></td>
 <td><form method="post" class="inline"><input type="hidden" name="csrf" value="<?=esc($_SESSION['csrf'])?>"><input type="hidden" name="id" value="<?=esc($row['id'])?>"><select name="status">
 <?php foreach (['waiting'=>'Ожидает','invited'=>'Приглашён','completed'=>'Завершён','cancelled'=>'Отменён'] as $value=>$label): ?>
 <option value="<?=esc($value)?>" <?= $row['status']===$value?'selected':'' ?>><?=esc($label)?></option>
