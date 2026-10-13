@@ -31,7 +31,7 @@ try {
         $sender = trim((string)($config['mail_from'] ?? ''));
         if (filter_var($sender, FILTER_VALIDATE_EMAIL)) {
             $subject = 'SAT Test Drive - новая заявка #' . $id;
-            $message = "Новая заявка на тест-драйв SAT\\n\\n"
+            $message = "Новая заявка на тест-драйв SAT\n\n"
                 . "Номер: #" . $id . "\n"
                 . "Модель: " . $model . "\n"
                 . "Количество осей: " . $axles . "\n"
