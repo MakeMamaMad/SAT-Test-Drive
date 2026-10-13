@@ -21,6 +21,7 @@ function renderCard(card,axles){
 }
 document.querySelectorAll('[data-card-model]').forEach(card=>{
  card.querySelectorAll('.axle-option').forEach(b=>b.addEventListener('click',()=>renderCard(card,b.dataset.axles)));
+ renderCard(card,card.querySelector('.axle-option.is-active')?.dataset.axles||'3');
 });
 document.querySelectorAll('.select-model').forEach(btn=>btn.addEventListener('click',()=>{
  const card=btn.closest('[data-card-model]');
