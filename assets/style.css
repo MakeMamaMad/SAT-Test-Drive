@@ -25,3 +25,14 @@
 .card-inside .spec{min-height:50px;align-items:center}
 .card-inside .select-model{margin-top:auto;flex-shrink:0}
 @media(max-width:760px){.hero{padding:28px 6% 30px}.hero h1{font-size:clamp(29px,7.8vw,42px)}.hero p{font-size:15px}.cards{grid-template-columns:1fr}.card-inside .muted{min-height:0}}
+
+/* Two-variant selector and synchronized card sizes */
+.axle-select{display:grid;grid-template-columns:1fr 1fr;gap:6px;padding:5px;background:#f0f1e9;border-radius:14px;margin:12px 0 17px}
+.axle-option{border:0;background:transparent;color:#4d554a;border-radius:10px;min-height:43px;cursor:pointer;font-weight:800}
+.axle-option.is-active{background:#cfe000;color:#111;box-shadow:0 1px 6px #0000000a}
+.axle-option:focus-visible{outline:3px solid #111;outline-offset:2px}
+.model-art.photo .photo-placeholder{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;flex-direction:column;font-size:clamp(25px,3vw,48px);font-weight:900;color:#657066;background:#e3e6da}
+.model-art.photo .photo-placeholder small{font-size:12px;letter-spacing:0;font-weight:600;margin-top:10px;color:#59615b}
+.model-art.photo [hidden]{display:none!important}
+.model-art.photo .photo-caption{position:absolute;z-index:1;bottom:15px;left:18px;background:#101112;color:#fff;padding:9px 12px;border-radius:20px;font-size:11px}
+.card-inside .select-model{margin-top:auto}
