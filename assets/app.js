@@ -1,12 +1,12 @@
 // Images are intentionally not substituted for an unverified axle configuration.
 const configurations={
  'SAT-500':{
-  3:{curb:'от 7 900 кг',volume:'43–49 м³',gross:'до 45 000 кг',image:'',caption:'3 оси · фото уточняется'},
+  3:{curb:'от 7 900 кг',volume:'43–49 м³',gross:'до 45 000 кг',image:'https://www.satpricep.by/upload/dev2fun.imagecompress/webp/resize_cache/iblock/30a/220_150_0/o41xubrun6bkg1h46t0es04unb1t82f6.webp',caption:'SAT-500 · 3 оси'},
   4:{curb:'от 7 920 кг',volume:'49–55 м³',gross:'до 52 500 кг',image:'https://frankfurt.apollo.olxcdn.com/v1/files/pwm90kp4ujse2-KZ/image%3Bs%3D4160x3120',caption:'SAT-500 · 4 оси'}
  },
  'SAT-545':{
-  3:{curb:'7 980 кг',volume:'45 м³',gross:'50 300 кг',image:'https://satpricep.ru/upload/dev2fun.imagecompress/webp/resize_cache/iblock/8a6/940_640_0/tsmisk24qf23z0ww7xgjf1qdowt82i4n.webp',caption:'SAT-545 · исполнение фото уточняется'},
-  4:{curb:'уточняется',volume:'уточняется',gross:'уточняется',image:'',caption:'4 оси · фото уточняется'}
+  3:{curb:'7 980 кг',volume:'45 м³',gross:'50 300 кг',image:'',caption:'SAT-545 · 3 оси · фото уточняется'},
+  4:{curb:'уточняется',volume:'уточняется',gross:'уточняется',image:'https://satpricep.ru/upload/dev2fun.imagecompress/webp/resize_cache/iblock/8a6/940_640_0/tsmisk24qf23z0ww7xgjf1qdowt82i4n.webp',caption:'SAT-545 · 4 оси'}
  }
 };
 function renderCard(card,axles){
@@ -14,7 +14,8 @@ function renderCard(card,axles){
  for(const [key,value] of Object.entries({axles,curb:info.curb,volume:info.volume,gross:info.gross})) card.querySelector('[data-spec="'+key+'"]').textContent=value;
  card.querySelectorAll('.axle-option').forEach(b=>{const active=b.dataset.axles===String(axles);b.classList.toggle('is-active',active);b.setAttribute('aria-pressed',String(active));});
  const img=card.querySelector('.model-art img'),placeholder=card.querySelector('.photo-placeholder');
- if(info.image){img.src=info.image;img.alt='Фотография '+model+' (исполнение по фотографии требует подтверждения)';img.hidden=false;placeholder.hidden=true;}
+ img.onerror=()=>{img.hidden=true;img.removeAttribute('src');placeholder.hidden=false;};
+ if(info.image){img.src=info.image;img.alt='Фотография '+model+' · '+axles+' оси';img.hidden=false;placeholder.hidden=true;}
  else{img.removeAttribute('src');img.hidden=true;placeholder.hidden=false;}
  card.querySelector('.photo-caption').textContent=info.caption;
 }
