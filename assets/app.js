@@ -1,11 +1,11 @@
 // Images are intentionally not substituted for an unverified axle configuration.
 const configurations={
  'SAT-500':{
-  3:{curb:'от 7 900 кг',volume:'43–49 м³',gross:'до 45 000 кг',image:'https://www.satpricep.by/upload/dev2fun.imagecompress/webp/resize_cache/iblock/30a/220_150_0/o41xubrun6bkg1h46t0es04unb1t82f6.webp',caption:'SAT-500 · 3 оси'},
+  3:{curb:'от 7 900 кг',volume:'43–49 м³',gross:'до 45 000 кг',image:'https://www.satpricep.by/upload/dev2fun.imagecompress/webp/resize_cache/iblock/30a/940_640_0/o41xubrun6bkg1h46t0es04unb1t82f6.webp',caption:'SAT-500 · 3 оси'},
   4:{curb:'от 7 920 кг',volume:'49–55 м³',gross:'до 52 500 кг',image:'https://frankfurt.apollo.olxcdn.com/v1/files/pwm90kp4ujse2-KZ/image%3Bs%3D4160x3120',caption:'SAT-500 · 4 оси'}
  },
  'SAT-545':{
-  3:{curb:'7 980 кг',volume:'45 м³',gross:'50 300 кг',image:'',caption:'SAT-545 · 3 оси · фото уточняется'},
+  3:{curb:'7 980 кг',volume:'45 м³',gross:'50 300 кг',image:'assets/images/sat545-3.webp',caption:'SAT-545 · 3 оси'},
   4:{curb:'уточняется',volume:'уточняется',gross:'уточняется',image:'https://satpricep.ru/upload/dev2fun.imagecompress/webp/resize_cache/iblock/8a6/940_640_0/tsmisk24qf23z0ww7xgjf1qdowt82i4n.webp',caption:'SAT-545 · 4 оси'}
  }
 };
