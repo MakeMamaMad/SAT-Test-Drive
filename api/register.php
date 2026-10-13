@@ -3,8 +3,9 @@ declare(strict_types=1);
 require __DIR__.'/bootstrap.php';
 if ($_SERVER['REQUEST_METHOD'] !== 'POST') respond(405, ['error'=>'Метод не разрешён.']);
 if (!isSameOrigin()) respond(403, ['error'=>'Недопустимый источник запроса.']);
-if (strlen(file_get_contents('php://input', false, null, 0, 8193)) > 8192) respond(413, ['error'=>'Слишком большой запрос.']);
-$data = json_decode(file_get_contents('php://input'), true);
+$rawBody = file_get_contents('php://input', false, null, 0, 8193);
+if ($rawBody === false || strlen($rawBody) > 8192) respond(413, ['error'=>'Слишком большой запрос.']);
+$data = json_decode($rawBody, true);
 if (!is_array($data)) respond(400, ['error'=>'Некорректные данные.']);
 $model = (string)($data['model'] ?? '');
 $axles = (int)($data['axles'] ?? 0);
@@ -24,6 +25,36 @@ try {
     $stmt = $db->prepare('INSERT INTO registrations (public_token,model,axles,full_name,phone,email,consent_at) VALUES (?,?,?,?,?,?,UTC_TIMESTAMP())');
     $stmt->execute([$token,$model,$axles,$name,$phone,$email]);
     $id = (int)$db->lastInsertId();
+    // Email delivery is best effort and must never interrupt a saved registration.
+    $recipient = trim((string)($config['notification_email'] ?? ''));
+    if (filter_var($recipient, FILTER_VALIDATE_EMAIL)) {
+        $sender = trim((string)($config['mail_from'] ?? ''));
+        if (filter_var($sender, FILTER_VALIDATE_EMAIL)) {
+            $subject = 'SAT Test Drive - новая заявка #' . $id;
+            $message = "Новая заявка на тест-драйв SAT\\n\\n"
+                . "Номер: #" . $id . "\n"
+                . "Модель: " . $model . "\n"
+                . "Количество осей: " . $axles . "\n"
+                . "ФИО: " . $name . "\n"
+                . "Телефон: " . $phone . "\n"
+                . "Email: " . $email . "\n";
+            $headers = [
+                'From' => $sender,
+                'Content-Type' => 'text/plain; charset=UTF-8',
+                'MIME-Version' => '1.0',
+                'X-Mailer' => 'SAT-Test-Drive'
+            ];
+            try {
+                if (!mail($recipient, $subject, $message, $headers)) {
+                    error_log('SAT Test Drive: mail() returned false for registration #' . $id);
+                }
+            } catch (Throwable $mailError) {
+                error_log('SAT Test Drive: mail() failed for registration #' . $id);
+            }
+        } else {
+            error_log('SAT Test Drive: mail_from is missing or invalid');
+        }
+    }
     respond(201, ['token'=>$token,'number'=>$id,'model'=>$model,'axles'=>$axles,'status'=>'waiting','url'=>'queue.html?token='.$token]);
 } catch (Throwable $e) {
     error_log('Registration insert failed');
