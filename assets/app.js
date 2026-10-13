@@ -13,6 +13,7 @@ document.querySelector('#application').addEventListener('submit', async event =>
   const submit = form.querySelector('button[type=submit]');
   const payload = {
     model: form.elements.model.value,
+    axles: Number(form.elements.axles.value),
     name: form.elements.name.value.trim(),
     phone: form.elements.phone.value.trim(),
     email: form.elements.email.value.trim(),
