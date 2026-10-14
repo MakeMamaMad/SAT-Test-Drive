@@ -6,7 +6,7 @@ const configurations={
  },
  'SAT-545':{
   3:{curb:'7 980 кг',volume:'45 м³',gross:'50 300 кг',image:'assets/images/sat545-3.webp',caption:'SAT-545 · 3 оси'},
-  4:{curb:'8 900 кг ±3%',volume:'45 м³',gross:'не указана',image:'https://satpricep.ru/upload/dev2fun.imagecompress/webp/resize_cache/iblock/8a6/940_640_0/tsmisk24qf23z0ww7xgjf1qdowt82i4n.webp',caption:'SAT-545 · 4 оси'}
+  4:{curb:'8 900 кг ±3%',volume:'45 м³',gross:'до 57 200 кг',image:'https://satpricep.ru/upload/dev2fun.imagecompress/webp/resize_cache/iblock/8a6/940_640_0/tsmisk24qf23z0ww7xgjf1qdowt82i4n.webp',caption:'SAT-545 · 4 оси'}
  }
 };
 function renderCard(card,axles){
